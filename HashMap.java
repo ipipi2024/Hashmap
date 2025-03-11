@@ -7,12 +7,13 @@ public class HashMap {
     }
 
 
-    //hash the strings into integers values
     private int hashString(String str) {
         if (str == null) {
             System.out.println("Must be a valid string!");
             return -1;
         }
+        // Convert to lowercase for case-insensitive hashing
+        str = str.toLowerCase();
         // A simple hash function for strings
         int hash = 0;
         for (char c : str.toCharArray()) {
@@ -38,7 +39,7 @@ public class HashMap {
             newList.addAtTail(key, value);
         }else{
             //add at the end 
-            valueToKeyMap[valueHash].addAtTail(key, value);
+           valueToKeyMap[valueHash].addAtTail(key, value);
         }
     }
 

@@ -8,8 +8,11 @@ public class Main {
         map.addEntry(4, "Chris");
         map.addEntry(7, "chris");
 
-        System.out.println(map.getHasString("John"));
-        System.out.println(map.valueToKeyMap[9].head.value);
+        System.out.println(map.getHasString("Chris"));
+        System.out.println(map.valueToKeyMap[5].head.value);
+        System.out.println(map.valueToKeyMap[5].head.key);
+        System.out.println(map.valueToKeyMap[5].head.next.value);
+        System.out.println(map.valueToKeyMap[5].head.next.key);
         
         
     }
