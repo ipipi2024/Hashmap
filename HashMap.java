@@ -1,22 +1,18 @@
 public class HashMap {
-    Entry[] keyToValueMap;
-    Entry[] valueToKeyMap; // A second array indexed by hash of value
-    
-    HashMap(int size) {
-        keyToValueMap = new Entry[size];
-        valueToKeyMap = new Entry[size];
+    //store entry list to avoid collusion
+    SinglyLinkedList [] valueToKeyMap;
+
+    HashMap (int size) {
+        valueToKeyMap = new SinglyLinkedList[size];
     }
-    
-    public class Entry {
-        int key;
-        String value;
-        Entry(int key, String value) {
-            this.key = key;
-            this.value = value;
-        }
-    }
-    
+
+
+    //hash the strings into integers values
     private int hashString(String str) {
+        if (str == null) {
+            System.out.println("Must be a valid string!");
+            return -1;
+        }
         // A simple hash function for strings
         int hash = 0;
         for (char c : str.toCharArray()) {
@@ -24,21 +20,26 @@ public class HashMap {
         }
         return hash;
     }
-    
-    public void add(int key, String value) {
-        Entry newEntry = new Entry(key, value);
-        keyToValueMap[key] = newEntry;
-        
-        // Also store in value-to-key map
-        int valueHash = hashString(value);
-        valueToKeyMap[valueHash] = newEntry;
+
+    //public getter method to get hashed String
+    public int getHasString(String value) {
+        return hashString(value);
     }
-    
-    public int findKey(String value) {
+
+    //method to add Entry
+    public void addEntry(int key, String value) {
         int valueHash = hashString(value);
-        if (valueToKeyMap[valueHash] != null && valueToKeyMap[valueHash].value.equals(value)) {
-            return valueToKeyMap[valueHash].key;
+
+        if (valueToKeyMap[valueHash] == null) {
+            //if no entry exist, add it
+            //create a new singly linked list
+            SinglyLinkedList newList = new SinglyLinkedList();
+            valueToKeyMap[valueHash] = newList;
+            newList.addAtTail(key, value);
+        }else{
+            //add at the end 
+            valueToKeyMap[valueHash].addAtTail(key, value);
         }
-        return -1; // Not found
     }
+
 }
